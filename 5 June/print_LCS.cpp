@@ -15,7 +15,7 @@ string print_LCS(string &str1, string &str2)
     {
         dp[0][i] = 0;
     }
-    string ans = " ";
+
     for (int i = 1; i <= n; i++)
     {
         for (int j = 1; j <= m; j++)
@@ -23,7 +23,6 @@ string print_LCS(string &str1, string &str2)
             if (str1[i - 1] == str2[j - 1])
             {
                 dp[i][j] = 1 + dp[i - 1][j - 1];
-                
             }
             else
             {
@@ -32,7 +31,27 @@ string print_LCS(string &str1, string &str2)
         }
     }
     /* Printing LCS after filling up the DP Table */
-    
+    string ans = " ";
+    int i = n, j = m;
+    while (i > 0 && j > 0)
+    {
+        if (str1[i - 1] == str2[j - 1])
+        {
+            ans.push_back(str1[i - 1]);
+            i--;
+            j--;
+        }
+        else if (dp[i - 1][j] > dp[i][j - 1])
+        {
+            i = i - 1;
+        }
+        else
+        {
+            j = j - 1;
+        }
+    }
+    reverse(ans.begin(), ans.end());
+    return ans;
 }
 int main()
 {
