@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
+// Binary Search
 int search(vector<int> &nums, int target)
 {
     int ans = -1;
@@ -29,7 +30,90 @@ int search(vector<int> &nums, int target)
         }
     }
     return ans;
-};
+}
+// Lower Bound
+int lowerBound(vector<int> &arr, int x)
+{
+    int s = 0, e = arr.size() - 1;
+    int ans = arr.size();
+    while (s <= e)
+    {
+        int mid = s + (e - s) / 2;
+        if (arr[mid] > x)
+        {
+            ans = mid;
+            e = mid - 1;
+        }
+        else
+        {
+            s = mid + 1;
+        }
+    }
+    return ans;
+}
+// Upper Bound
+int upperBound(vector<int> &arr, int x)
+{
+    int s = 0, e = arr.size() - 1;
+    int ans = arr.size();
+    while (s <= e)
+    {
+        int mid = s + (e - s) / 2;
+        if (arr[mid] > x)
+        {
+            ans = mid;
+            e = mid - 1;
+        }
+        else
+        {
+            s = mid + 1;
+        }
+    }
+    return ans;
+}
+
+// Floor
+int floor(vector<int> &arr, int x)
+{
+    int s = 0, e = arr.size() - 1;
+    int ans = arr.size();
+    while (s <= e)
+    {
+        int mid = s + (e - s) / 2;
+        if (arr[mid] <= x)
+        {
+            ans = arr[mid];
+            s = mid + 1;
+        }
+        else
+        {
+            s = mid + 1;
+        }
+    }
+    return ans;
+}
+
+// Ceil
+int ceil(vector<int> &arr, int x)
+{
+    int s = 0, e = arr.size() - 1;
+    int ans = arr.size();
+    while (s <= e)
+    {
+        int mid = s + (e - s) / 2;
+        if (arr[mid] >= x)
+        {
+            ans = arr[mid];
+            e = mid - 1;
+        }
+        else
+        {
+            s = mid + 1;
+        }
+    }
+    return ans;
+}
+
 int main()
 {
     int n, target;
@@ -40,5 +124,7 @@ int main()
         cin >> arr[i];
     }
     cout << search(arr, target) << endl;
+    cout << "Floor: " << floor(arr, target) << endl;
+    cout << "Ceil: " << ceil(arr, target) << endl;
     return 0;
 }
