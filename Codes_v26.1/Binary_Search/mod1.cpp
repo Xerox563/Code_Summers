@@ -114,6 +114,18 @@ int ceil(vector<int> &arr, int x)
     return ans;
 }
 
+vector<int> searchRange(vector<int> &nums, int target)
+{
+    int fs = lower_bound(nums.begin(), nums.end(), target) - nums.begin();
+    if (fs == nums.size() || nums[fs] != target)
+    {
+        // first occurance exists
+        return {-1, -1};
+    }
+    int ls = upper_bound(nums.begin(), nums.end(), target) - nums.begin() - 1;
+    return {fs, ls};
+}
+
 int main()
 {
     int n, target;
